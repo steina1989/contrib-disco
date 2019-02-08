@@ -15,14 +15,6 @@ var table = populateTable(7, 52, function (id) {
 
 function populateTable(rows, cols, cb) {
 
-    // Classnames can't start with an integer..
-    var i2classdict = {
-        0: "a",
-        1: "b",
-        2: "c",
-        3: "d",
-        4: "e",
-    }
 
     var table = document.getElementById("table");
 
@@ -50,6 +42,9 @@ function populateTable(rows, cols, cb) {
 
 
 function submit() {
+
+    var msg = html2python()
+
     var xhr = new XMLHttpRequest();
     xhr.open("POST", "/", true);
 
@@ -59,16 +54,24 @@ function submit() {
             return
         }
         else {
-            console.log('Failure code', xhr.status);
+            console.log('Failure code:', xhr.status);
         }
     }
 
-    xhr.send(html2python());
+    xhr.send(msg);
 
 }
 
 
 
 function html2python() {
-    return "[[1,0,2], [0,3,1], [1,1,0]]"
+    var out = []
+    for (var r = 0, row; row = table.rows[r]; r++) {
+        var arrayRow = []
+        for (var c = 0, col; col = row.cells[c]; c++) {
+            arrayRow.push("abcde".indexOf(table.rows[r].cells[c].className))
+        }
+        out.push(arrayRow);
+    }
+    return JSON.stringify(out)
 }

@@ -1,3 +1,18 @@
+
+body{
+    max-width: 600;
+    margin: auto;
+}
+
+.header {
+    padding: 30px;
+    text-align: center;
+    background: #1abc9c;
+    color: white;
+    font-size: 30px;
+  }
+
+
 td.a {
     background-color: #ebedf0
 }
@@ -21,7 +36,7 @@ td.e{
 
 table {
     table-layout: fixed;
-    width: 600px; /* Important */
+    width: 600px;
     overflow: hidden;
     text-overflow: ellipsis;
     border-spacing: 5px;
