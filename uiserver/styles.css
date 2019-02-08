@@ -1,0 +1,32 @@
+td.a {
+    background-color: #ebedf0
+}
+
+td.b{
+    background-color: #c6e48b
+}
+
+td.c{
+    background-color: #7bc96f
+}
+
+td.d{
+    background-color: #239a3b
+
+}
+
+td.e{
+    background-color: #196127
+}
+
+table {
+    table-layout: fixed;
+    width: 600px; /* Important */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    border-spacing: 5px;
+  }
+  td {
+    width: 15px;
+    height: 15px;
+  }
