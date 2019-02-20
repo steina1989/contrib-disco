@@ -2,14 +2,34 @@
 import http.server
 import socketserver
 import os
-import socket
 import webbrowser
 
 alive = True
 message = None
 
+
 def is_alive():
     return alive
+
+
+def run():
+
+    return_dir = os.getcwd()
+    os.chdir("uiserver")
+
+    with socketserver.TCPServer(("", 0), CustomRequestHandler) as httpd:
+        address = "http://localhost:{}".format(httpd.server_address[1])
+        try:
+            webbrowser.open_new(address)
+            print("Launching interface")
+        except webbrowser.Error:
+            print("Browse to {} to access the interface".format(address))
+        while is_alive():
+            httpd.handle_request()
+
+    os.chdir(return_dir)
+    return eval(message)
+
 
 class CustomRequestHandler(http.server.SimpleHTTPRequestHandler):
     def do_POST(self):
@@ -29,21 +49,3 @@ class CustomRequestHandler(http.server.SimpleHTTPRequestHandler):
     # Be quiet!
     def log_message(self, format, *args):
         return
-
-def run():
-
-    return_dir = os.getcwd()
-    os.chdir("uiserver")
-
-    with socketserver.TCPServer(("", 0), CustomRequestHandler) as httpd:
-        address = "http://localhost:{}".format(httpd.server_address[1])
-        try:
-            webbrowser.open_new(address)
-            print("Launching interface")
-        except webbrowser.Error:
-            print("Browse to {} to access the interface".format(address))
-        while is_alive():
-            httpd.handle_request()
-
-    os.chdir(return_dir)
-    return eval(message)
