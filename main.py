@@ -13,7 +13,7 @@ def generate_bash(density_list):
     x = date.today() - timedelta(days=365)
     d = timedelta(days=1)
     for _ in range(365):
-        print("git commit --date {}".format(x.isoformat()))
+        print(f"git commit --date {x.isoformat()}")
         x = x + d
 
 
