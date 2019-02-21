@@ -15,7 +15,7 @@ def is_alive():
 def run():
 
     return_dir = os.getcwd()
-    os.chdir("uiserver")
+    os.chdir("static")
 
     with socketserver.TCPServer(("", 0), CustomRequestHandler) as httpd:
         address = f"http://localhost:{httpd.server_address[1]}"

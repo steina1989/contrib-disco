@@ -1,0 +1,6 @@
+git init
+git remote add origin $remote
+
+$commits_modifications
+
+git push -u origin master
