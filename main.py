@@ -10,22 +10,25 @@ def main(args):
 
     commits = generate_commits(density_matrix)
 
-    bash = substitute_template(args, commits)
+    bash = substitute_template(args, {"commits": commits})
 
-    print(bash)
+    with open("out.bash","w") as output_file:
+        output_file.write(bash)
 
 
-def generate_commits(density_matrix: list) -> dict:
+def generate_commits(density_matrix: list) -> str:
     out = ""
     x = date.today() - timedelta(days=365)
     d = timedelta(days=1)
+
     for density_col in zip(*density_matrix):  # Iter column wise
         for num_commits in density_col:
-            out += f"git commit --date {x.isoformat()}"
-            out += "\n"
-        x = x + d
-
-    return {"commits_modifications": out}
+            for value in range(num_commits):
+                out += f"echo {value} >> out.txt\n"
+                out += "git add -A\n"
+                out += f"git commit -m \"Workworkwork\" --date {x.isoformat()}\n"
+            x = x + d
+    return out
 
 
 def substitute_template(args: dict, commits: dict):

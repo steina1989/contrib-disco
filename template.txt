@@ -1,6 +1,5 @@
 git init
 git remote add origin $remote
 
-$commits_modifications
-
+$commits
 git push -u origin master
