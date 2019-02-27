@@ -1,7 +1,7 @@
 
 
 
-var table = populateTable(7, 52, function (id) {
+var table = populateTable(7, 53, function (id) {
     console.log('You clicked', id)
 
     var td = document.getElementById(id);
@@ -15,7 +15,6 @@ var table = populateTable(7, 52, function (id) {
 
 function populateTable(rows, cols, cb) {
 
-
     var table = document.getElementById("table");
 
     var i = 0;
@@ -28,7 +27,7 @@ function populateTable(rows, cols, cb) {
             td.classList.add("abcde"[Math.floor(Math.random() * 5)])
             td.id = i;
 
-            td.addEventListener('click', (function (i) {
+            td.addEventListener('mouseover', (function (i) {
                 return function () {
                     cb(i);
                 }
@@ -75,3 +74,12 @@ function html2python() {
     }
     return JSON.stringify(out)
 }
+
+function clearCanvas() {
+    for (var r = 0, row; row = table.rows[r]; r++) {
+        for (var c = 0, col; col = row.cells[c]; c++) {
+            table.rows[r].cells[c].className = "a"
+        }
+    }
+}
+
