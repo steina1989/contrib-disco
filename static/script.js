@@ -1,15 +1,28 @@
 
+let mouseIsDown = false
 
+document.addEventListener("pointerdown", function () {
+    console.log("Mouse down")
+    mouseIsDown = true
+})
+
+document.addEventListener("pointerup", function () {
+    console.log("Mouse up")
+    mouseIsDown = false
+})
 
 var table = populateTable(7, 53, function (id) {
-    console.log('You clicked', id)
+    
+    if (mouseIsDown) {
+        var td = document.getElementById(id);
 
-    var td = document.getElementById(id);
+        var oldIndex = "abcde".indexOf(td.className);
+        var newIndex = (oldIndex + 1) % 5;
 
-    var oldIndex = "abcde".indexOf(td.className);
-    var newIndex = (oldIndex + 1) % 5;
+        td.className = "abcde"[newIndex];
 
-    td.className = "abcde"[newIndex];
+    }
+
 })
 
 
